@@ -1,0 +1,44 @@
+body,
+h1,
+h2,
+h3,
+p,
+ul,
+li {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #006281;
+    padding: 20px;
+
+}
+
+main {
+    flex-grow: 1;
+    max-width: auto;
+    margin: 20px 30px;
+    padding: 0 20px;
+}
+
+footer {
+    background-color: #006281;
+    padding: 10px;
+    text-align: center;
+}
+
+footer p {
+    padding-top: 1rem;
+    padding-bottom: 0;
+}

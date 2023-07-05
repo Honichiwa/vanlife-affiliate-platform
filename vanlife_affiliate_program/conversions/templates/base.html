@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Rolling Dream Buillders{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+<header>
+    <ul class="nav">
+        <li class="logo">Rolling Dream Buillders</li>
+        <li><a href="{% url 'home' %}"> Home</a></li>
+    </ul>
+</header>
+<main>
+{% if messages %}
+    {% for message in messages %}
+    <p class="box box-{{ message.tags }}">{{ message }}</p>
+{% endfor %}
+{% endif %}
+{% block content %}
+{% endblock content %}
+</main>
+<footer><p>&copy;Rolling Dream Buillders 2023</p></footer>
+</body>
