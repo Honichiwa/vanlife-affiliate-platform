@@ -4,15 +4,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Rolling Dream Buillders{% endblock title %}</title>
+    <title>{% block title %}CamperVanCraft{% endblock title %}</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
 <body>
 <header>
-    <ul class="nav">
-        <li class="logo">Rolling Dream Buillders</li>
-        <li><a href="{% url 'home' %}"> Home</a></li>
-    </ul>
+    <div class='container'>
+        <ul class="nav">
+            <div  class='logo'>
+                <li><a href="{% url 'home' %}">CamperVanCraft</a></li>
+            </div>
+            <div class='head-menu'>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li>
+                    <div class="dropdown">
+                    <button>Browse Builds
+                            <div class="dropdown-content">
+                              <a href="{% url 'van_list' %}">Vans</a>
+                              <a href="{% url 'rv_list' %}">Rvs</a>
+                            </div>
+                          </div>
+                    </button>
+                </li>
+                <li><a href="{% url 'aff_guide' %}">Affiliate</a></li>
+                <li>Log In</li>
+            </div>
+        </ul>
+    </div>
 </header>
 <main>
 {% if messages %}
@@ -23,5 +42,5 @@
 {% block content %}
 {% endblock content %}
 </main>
-<footer><p>&copy;Rolling Dream Buillders 2023</p></footer>
+<footer><p>&copy;CamperVanCraft</p></footer>
 </body>

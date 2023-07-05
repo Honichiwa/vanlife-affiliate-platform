@@ -1,4 +1,21 @@
 {% extends 'base.html' %}
+{% block title %}home | {{ block.super }}{% endblock title %}
 {% block content %}
-<p>{{user}}<p>
+<div class='container'>
+    <ul class='categories'>
+        <div class='auto'>
+            <li class='vans'>
+                Van Builds
+            </li>
+            <li class='rvs'>
+                RV Builds
+            </li>
+        </div>
+        <div class='media'>
+            <li class='Blog'>
+                Blog
+            </li>
+        </div>
+    </ul>
+</div>
 {% endblock content %}

@@ -1,0 +1,18 @@
+.container.categories {
+    display: flex;
+}
+
+.categories {
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.auto {
+    display: flex;
+    justify-content: space-between;
+}
+
+.media {
+    display: flex;
+    justify-content: center;
+}
