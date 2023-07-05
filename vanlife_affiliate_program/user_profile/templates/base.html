@@ -9,6 +9,13 @@
     {% endblock %}
   </head>
   <body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+            </ul>
+        </nav>
+    </header>
     {% block body %}
 
     {% if messages %}

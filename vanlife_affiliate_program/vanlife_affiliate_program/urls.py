@@ -2,8 +2,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from conversions.views import home
 
 urlpatterns = [
+    path('', home, name="home"),
     path('admin/', admin.site.urls),
     path('conversions/', include('conversions.urls')),
     path('profile/', include('user_profile.urls')),

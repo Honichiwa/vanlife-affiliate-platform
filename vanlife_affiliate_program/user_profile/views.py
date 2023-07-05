@@ -10,7 +10,7 @@ User = get_user_model()
 def signup(request):
     if request.user.is_authenticated:
         messages.info(request, 'In order to sign up, you need to logout first')
-        return redirect('index')
+        return redirect('home')
     if request.method == "POST":
         error = False
         first_name = request.POST.get('first_name')
