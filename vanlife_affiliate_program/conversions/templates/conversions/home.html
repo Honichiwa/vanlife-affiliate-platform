@@ -1,20 +1,30 @@
 {% extends 'base.html' %}
-{% block title %}home | {{ block.super }}{% endblock title %}
+{% load static %}
+{% block title %}{{ block.super }}{% endblock title %}
 {% block content %}
 <div class='container'>
     <ul class='categories'>
         <div class='auto'>
-            <li class='vans'>
-                Van Builds
-            </li>
-            <li class='rvs'>
-                RV Builds
-            </li>
+            <a href="{% url 'van_list' %}">
+                <li class='vans'>
+                    <img class="picture" src="{% static 'conversions/img/van.png' %}">
+                    <div class='img-text'>Van Builds</div>
+                </li>
+            </a>
+            <a href="{% url 'rv_list' %}">
+                <li class='rvs'>
+                    <img class="picture" src="{% static 'conversions/img/rv.png' %}">
+                    <div class='img-text'>Rv Builds</div>
+                </li>
+            </a>
         </div>
         <div class='media'>
-            <li class='Blog'>
-                Blog
-            </li>
+            <a href="{% url 'blog' %}">
+                <li class='blog'>
+                    <img class="picture" src="{% static 'conversions/img/blog.png' %}"> 
+                    <div class='img-text'>Blog</div>
+                </li>
+            </a>
         </div>
     </ul>
 </div>

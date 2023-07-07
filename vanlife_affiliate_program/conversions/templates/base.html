@@ -19,7 +19,7 @@
                 <li><a href="{% url 'about' %}">About</a></li>
                 <li>
                     <div class="dropdown">
-                    <button>Browse Builds
+                    <button class="dropbtn">Browse Builds &#11206;
                             <div class="dropdown-content">
                               <a href="{% url 'van_list' %}">Vans</a>
                               <a href="{% url 'rv_list' %}">Rvs</a>
@@ -28,7 +28,22 @@
                     </button>
                 </li>
                 <li><a href="{% url 'aff_guide' %}">Affiliate</a></li>
-                <li>Log In</li>
+                {% if user.is_authenticated %}
+                <li>
+                    <div class="dropdown">
+                        <button class="dropbtn">{{user.username}} &#11206;
+                                <div class="dropdown-content">
+                                  <a href="{% url 'home' %}">My profile</a>
+                                  <a href="{% url 'home' %}">My conversion</a>
+                                  <a href="{% url 'home' %}">My liked</a>
+                                  <a href="{% url 'home' %}">Log out</a>
+                                </div>
+                              </div>
+                        </button>
+                </li>
+                {% else %}
+                <li>Log in</li>
+                {% endif %}
             </div>
         </ul>
     </div>

@@ -14,3 +14,6 @@ def van_list(request):
 
 def rv_list(request):
     return render(request, 'conversions/rv_list.html')
+
+def blog(request):
+    return render(request, 'conversions/blog.html')
