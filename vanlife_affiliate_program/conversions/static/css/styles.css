@@ -14,7 +14,7 @@ header {
     background: rgb(0, 161, 102);
     padding: 25px 0;
     position: relative;
-    border-bottom: 1px solid rgb(0, 0, 0);
+    border-bottom: 15px solid rgb(0, 0, 0);
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 }
@@ -52,7 +52,7 @@ ul.nav li {
 }
 
 .head-menu li {
-    border: 1px solid rgb(0, 0, 0);
+    border: 5px solid rgb(0, 0, 0);
     border-bottom-left-radius: 20px;
     border-top-right-radius: 20px;
 }
