@@ -34,7 +34,7 @@ class Conversion(models.Model):
         (1, _('Rv')), 
     )
     c_type = models.PositiveBigIntegerField(
-         _("ticket status"),
+         _("conversion type"),
         choices=TYPE_CHOICES,
         db_index=True,
     )
@@ -60,7 +60,7 @@ class Conversion(models.Model):
         verbose_name_plural = _("conversions")
 
     def __str__(self):
-        return self.owner
+        return self.conversion_slug
 
     def get_absolute_url(self):
         return reverse("conversion_detail", kwargs={"pk": self.pk})
@@ -102,7 +102,7 @@ class ConversionSocial(models.Model):
         verbose_name_plural = _("conversion socials")
 
     def __str__(self):
-        return self.conversion
+        return f'{self.conversion.conversion_slug} {self.social.name}'
 
     def get_absolute_url(self):
         return reverse("conversionocial_detail", kwargs={"pk": self.pk})
@@ -124,6 +124,12 @@ class GadgetType(models.Model):
 
 
 class Gadget(models.Model):
+    conversion = models.ForeignKey(
+        Conversion, 
+        verbose_name=_("conversion"), 
+        on_delete=models.CASCADE,
+        related_name='gadget'
+    )
     type = models.ForeignKey(
         GadgetType, 
         verbose_name=_("type"), 
