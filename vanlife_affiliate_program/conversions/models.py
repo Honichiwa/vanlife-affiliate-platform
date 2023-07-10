@@ -51,6 +51,10 @@ class Conversion(models.Model):
     created_at = models.DateTimeField(_("Date created"), auto_now_add=True)
     visible = models.BooleanField(_("visible"), default=True)
 
+    @property
+    def slug(self):
+        return self.conversion_slug
+
     class Meta:
         verbose_name = _("conversion")
         verbose_name_plural = _("conversions")
