@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}{{user.username}} conversions | {{ block.super }}{% endblock title %}
+{% block content %}
+{% for conversion in conversions %}
+<p><a href="{% url 'van_detail' conversion.slug %}">{{conversion.conversion_slug}}</a><p>
+<p>{{conversion.make}}</p>
+<p>{{conversion.model}}</p>
+<p>{{conversion.year}}</p>
+{% endfor %}
+{% endblock content %}
+

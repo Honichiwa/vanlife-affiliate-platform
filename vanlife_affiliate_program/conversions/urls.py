@@ -7,7 +7,7 @@ urlpatterns = [
     path('about/', views.about, name="about"),
     path("affiliate/", views.affiliate, name="aff_guide"),
     path("vans/", views.VanListView.as_view(), name="van_list"),
-    path("conversion/<slug>", views.ConversionDetailView.as_view(), name="van_detail"),
     path("rvs/", views.RvListView.as_view(), name="rv_list"),
-    path("blog/", views.blog, name="blog")
+    path('myconversions/', views.UserConversionList.as_view(), name='user_conversion_list'),
+    path("conversion/<slug>", views.ConversionDetailView.as_view(), name="van_detail"),
 ]
