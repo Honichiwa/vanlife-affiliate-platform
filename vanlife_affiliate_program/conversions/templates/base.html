@@ -36,13 +36,14 @@
                                   <a href="{% url 'home' %}">My profile</a>
                                   <a href="{% url 'user_conversion_list' %}">My conversion</a>
                                   <a href="{% url 'home' %}">My liked</a>
-                                  <a href="{% url 'home' %}">Log out</a>
+                                  <a href="{% url 'logout' %}">Log out</a>
                                 </div>
                               </div>
                         </button>
                 </li>
                 {% else %}
-                <li>Log in</li>
+                <li><a href="{% url 'login' %}">Log in</a></li>
+                <li><a href="{% url 'register' %}">Sing up</a></li>
                 {% endif %}
             </div>
         </ul>
@@ -51,7 +52,7 @@
 <main>
 {% if messages %}
     {% for message in messages %}
-    <p class="box box-{{ message.tags }}">{{ message }}</p>
+    <p class="box box-{{ message.tags }}">{{ message }} alio{{message.tags}}</p>
 {% endfor %}
 {% endif %}
 {% block content %}
