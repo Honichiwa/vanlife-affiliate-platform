@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 {% block title %}Rvs | {{ block.super }}{% endblock title %}
 {% block content %}
-<p> these are rvs</p>
+{% for conversion in conversions %}
+{% if conversion.c_type == 1 %}
+<p><a href="{% url 'van_detail' conversion.slug %}">{{conversion.conversion_slug}}</a><p>
+<p>{{conversion.make}}</p>
+<p>{{conversion.model}}</p>
+<p>{{conversion.year}}</p>
+{% endif %}
+{% endfor %}
 {% endblock content %}
 

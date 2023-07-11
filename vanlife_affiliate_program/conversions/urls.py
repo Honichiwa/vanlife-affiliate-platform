@@ -1,12 +1,13 @@
 from django.contrib import admin
 from django.urls import path
-from . views import home, about, affiliate, van_list, rv_list, blog
+from . import views
 
 urlpatterns = [
-    path('', home, name="home"),
-    path('about/', about, name="about"),
-    path("affiliate/", affiliate, name="aff_guide"),
-    path("vans/", van_list, name="van_list"),
-    path("rvs/", rv_list, name="rv_list"),
-    path("blog/", blog, name="blog")
+    path('', views.home, name="home"),
+    path('about/', views.about, name="about"),
+    path("affiliate/", views.affiliate, name="aff_guide"),
+    path("vans/", views.VanListView.as_view(), name="van_list"),
+    path("conversion/<slug>", views.ConversionDetailView.as_view(), name="van_detail"),
+    path("rvs/", views.RvListView.as_view(), name="rv_list"),
+    path("blog/", views.blog, name="blog")
 ]

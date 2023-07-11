@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}{{conversion.conversion_slug}} | {{ block.super }}{% endblock title %}
+{% block content %}
+<p>{{conversion.conversion_slug}}<p>
+<p>{{conversion.make}}</p>
+<p>{{conversion.model}}</p>
+<p>{{conversion.year}}</p>
+<p>{{conversion.veichle_cost}}</p>
+<p>{{conversion.conversion_cost}}</p>
+<p>{{conversion.summary}}</p>
+<p>{{conversion.outro}}</p>
+<p>{{conversion.created_at}}</p>
+<p>{% for gadget in conversion.gadgets.all %}
+    <ul>{{ gadget.type.name }}</ul>
+    <li>{{ gadget.name }}</li>
+    <li>{{ gadget.aff_link }}</li>
+  {% endfor %}<p>
+<p>{% for conversion_social in conversion.conversion_social.all %}
+    {{conversion_social.link}}
+    {{ conversion_social.social.name }}
+    {{ conversion_social.social.svg_loggo_code | safe}}
+  {% endfor %}</p>
+{% endblock content %}
+

@@ -95,6 +95,7 @@ class ConversionSocial(models.Model):
         related_name='conversion_social'
     )
     link = models.URLField(_("link"), max_length=200)
+    social_username = models.CharField(_("Social username/@..."), max_length=100, blank=True, null=True)
     
 
     class Meta:
@@ -105,7 +106,7 @@ class ConversionSocial(models.Model):
         return f'{self.conversion.conversion_slug} {self.social.name}'
 
     def get_absolute_url(self):
-        return reverse("conversionocial_detail", kwargs={"pk": self.pk})
+        return reverse("conversionsocial_detail", kwargs={"pk": self.pk})
 
 
 class GadgetType(models.Model):
@@ -128,13 +129,13 @@ class Gadget(models.Model):
         Conversion, 
         verbose_name=_("conversion"), 
         on_delete=models.CASCADE,
-        related_name='gadget'
+        related_name='gadgets'
     )
     type = models.ForeignKey(
         GadgetType, 
         verbose_name=_("type"), 
         on_delete=models.CASCADE,
-        related_name='gadget'
+        related_name='gadgets'
     )
     name = models.CharField(_("name"), max_length=100)
     picture = models.ImageField(_("picture"), upload_to='gadgets/')
