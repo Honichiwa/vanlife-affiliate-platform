@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Deleting {{ object.conversion_slug }} to {{ block.super }}{% endblock title %}
+{% block content %}
+<h1>Delete car</h1>
+<p>Car license plate: {{ object.car_nr }}</p>
+<p>Model: {{ object.car_model}}</p>
+<p>VIN: {{ object.vin }}</p>
+<form action="{{ request.path }}" method="post">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+</form>
+<button onclick="history.back()">Go Back</button>
+{% endblock content %}

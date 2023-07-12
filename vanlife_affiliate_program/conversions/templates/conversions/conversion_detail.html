@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% block title %}{{conversion.conversion_slug}} | {{ block.super }}{% endblock title %}
 {% block content %}
-<p>{{conversion.conversion_slug}}<p>
+<p>{{conversion.conversion_slug}}</p>
+<p><a href="{% url 'profile' conversion.owner%}">{{conversion.owner}}</a></p>
 <p>{{conversion.make}}</p>
 <p>{{conversion.model}}</p>
 <p>{{conversion.year}}</p>
@@ -10,15 +11,22 @@
 <p>{{conversion.summary}}</p>
 <p>{{conversion.outro}}</p>
 <p>{{conversion.created_at}}</p>
-<p>{% for gadget in conversion.gadgets.all %}
+{% for gadget in conversion.gadgets.all %}
     <ul>{{ gadget.type.name }}</ul>
     <li>{{ gadget.name }}</li>
     <li>{{ gadget.aff_link }}</li>
-  {% endfor %}<p>
-<p>{% for conversion_social in conversion.conversion_social.all %}
+    {% if user == gadget.conversion.owner %}
+    <p><a href="{% url 'gadget_edit' gadget.pk %}?next={{ request.path }}">Update Gadget</a></p>
+    {% endif %}
+    {% endfor %}
+<p>
+  {% for conversion_social in conversion.conversion_social.all %}
     {{conversion_social.link}}
     {{ conversion_social.social.name }}
     {{ conversion_social.social.svg_loggo_code | safe}}
   {% endfor %}</p>
-{% endblock content %}
+{% if user == conversion.owner %}
+<p><a href="{% url 'gadget_create' %}?conversion_id={{ conversion.id }}&next={{ request.path }}">Create Gadget</a></p>
+{% endif %}
+  {% endblock content %}
 

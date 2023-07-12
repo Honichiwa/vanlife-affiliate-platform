@@ -1,6 +1,5 @@
 from django import forms
 from . import models
-from .models import Conversion
 from django.contrib.auth import get_user_model
 
 class ConversionForm(forms.ModelForm):
@@ -15,4 +14,13 @@ class ConversionForm(forms.ModelForm):
         widgets = {
             'owner': forms.HiddenInput(),
             'c_type': forms.HiddenInput(),
+        }
+
+class GadgetForm(forms.ModelForm):
+    type = forms.ModelChoiceField(models.GadgetType.objects.all(), widget=forms.RadioSelect())
+    class Meta:
+        model = models.Gadget
+        fields = ('type', 'name', 'picture', 'aff_link', 'conversion')
+        widgets = {
+            'conversion': forms.HiddenInput(),
         }

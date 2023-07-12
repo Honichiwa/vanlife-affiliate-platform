@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}{% if update %} Update gadget {% else %} Add Car {% endif %}{{ block.super }}{% endblock title %}
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% if update %} Update gadget {% else %} Add Gadget {% endif %}</button>
+    {% if update %}<button type="submit" class="btn btn-danger" name="delete">Delete Gadget</button>{% endif %}
+</form>
+<button onclick="history.back()">Go Back</button>
+{% endblock content %}
