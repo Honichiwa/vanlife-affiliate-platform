@@ -9,5 +9,6 @@ urlpatterns = [
     path("vans/", views.VanListView.as_view(), name="van_list"),
     path("rvs/", views.RvListView.as_view(), name="rv_list"),
     path('myconversions/', views.UserConversionList.as_view(), name='user_conversion_list'),
-    path("conversion/<slug>", views.ConversionDetailView.as_view(), name="van_detail"),
+    path('myconversions/create/', views.ConversionCreateView.as_view(), name='conversion_create'),
+    path("conversion/<slug>/", views.ConversionDetailView.as_view(), name="van_detail"),
 ]

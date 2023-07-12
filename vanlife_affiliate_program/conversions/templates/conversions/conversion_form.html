@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}{% if update %} Update car {% else %} Add Car {% endif %}{{ block.super }}{% endblock title %}
+{% block content %}
+<form method="post" action="{{ request.path }}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% if update %} Update car {% else %} Add Car {% endif %}</button>
+</form>
+{% endblock content %}

@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
+from .models import ProfileIcon
 
 
 class UserRegistrationForm(UserCreationForm):
@@ -17,3 +18,12 @@ class UserRegistrationForm(UserCreationForm):
             user.save()
 
         return user
+    
+
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+    icon = forms.ModelChoiceField(ProfileIcon.objects.all(), widget=forms.RadioSelect())
+
+    class Meta:
+        model = get_user_model()
+        fields = ['first_name', 'last_name', 'email', 'icon', 'about_you', 'reason']

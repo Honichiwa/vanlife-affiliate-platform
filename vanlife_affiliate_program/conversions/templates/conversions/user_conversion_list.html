@@ -7,5 +7,7 @@
 <p>{{conversion.model}}</p>
 <p>{{conversion.year}}</p>
 {% endfor %}
+<a href="{% url 'conversion_create' %}?c_type=0">Add Van</a>
+<a href="{% url 'conversion_create' %}?c_type=1">Add RV</a>
 {% endblock content %}
 

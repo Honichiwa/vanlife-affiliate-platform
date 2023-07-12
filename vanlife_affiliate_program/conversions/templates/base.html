@@ -33,7 +33,7 @@
                     <div class="dropdown">
                         <button class="dropbtn">{{user.username}} &#11206;
                                 <div class="dropdown-content">
-                                  <a href="{% url 'home' %}">My profile</a>
+                                  <a href="{% url 'profile' user.username%}">My profile</a>
                                   <a href="{% url 'user_conversion_list' %}">My conversion</a>
                                   <a href="{% url 'home' %}">My liked</a>
                                   <a href="{% url 'logout' %}">Log out</a>
@@ -52,7 +52,7 @@
 <main>
 {% if messages %}
     {% for message in messages %}
-    <p class="box box-{{ message.tags }}">{{ message }} alio{{message.tags}}</p>
+    <p class="box box-{{ message.tags }}">{{ message | safe}} {{message.tags}}</p>
 {% endfor %}
 {% endif %}
 {% block content %}
