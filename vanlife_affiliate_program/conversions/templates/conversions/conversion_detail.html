@@ -18,14 +18,15 @@
     {% if user == gadget.conversion.owner %}
     <p><a href="{% url 'gadget_edit' gadget.pk %}?next={{ request.path }}">Update Gadget</a></p>
     {% endif %}
-    {% endfor %}
-<p>
-  {% for conversion_social in conversion.conversion_social.all %}
-    {{conversion_social.link}}
-    {{ conversion_social.social.name }}
-    {{ conversion_social.social.svg_loggo_code | safe}}
-  {% endfor %}</p>
+{% endfor %}
+{% for conversion_social in conversion.conversion_social.all %}
+  <p>{{conversion_social.link}}</p>
+  <p>{{ conversion_social.social.name }}</p>
+  <p>{{ conversion_social.social.svg_loggo_code | safe}}</p>
+  <p><a href="{% url 'conversion_social_edit' conversion_social.pk %}?next={{ request.path }}">Update Social</a></p>
+{% endfor %}
 {% if user == conversion.owner %}
+<p><a href="{% url 'conversion_social_create' %}?conversion_id={{ conversion.id }}&next={{ request.path }}">Add social</a></p>
 <p><a href="{% url 'gadget_create' %}?conversion_id={{ conversion.id }}&next={{ request.path }}">Create Gadget</a></p>
 {% endif %}
   {% endblock content %}

@@ -5,8 +5,8 @@ from django.views import generic
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models.query import QuerySet
-from .models import Conversion, Gadget
-from .forms import ConversionForm, GadgetForm
+from .models import Conversion, Gadget, ConversionSocial
+from .forms import ConversionForm, GadgetForm, ConversionSocialForm
 from urllib.parse import urlparse
 
 def home(request):
@@ -170,6 +170,79 @@ class GadgetUpdateDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.Up
 
     def form_valid(self, form):
         messages.success(self.request, 'Gadget Updated!')
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        next_url = self.request.GET.get('next')
+        if next_url:
+            next_path = urlparse(next_url).path
+            return next_path
+        else:
+            return reverse('user_conversion_list')
+
+
+class ConversionSocialCreateView(LoginRequiredMixin, generic.CreateView):
+    model = ConversionSocial
+    form_class = ConversionSocialForm
+    template_name = 'conversions/conversion_social_form.html'
+    slug_field = 'conversion_slug'
+    slug_url_kwarg = 'slug'
+
+    def get_success_url(self):
+        next_url = self.request.GET.get('next')
+        if next_url:
+            next_path = urlparse(next_url).path
+            return next_path
+        else:
+            return reverse('user_conversion_list')
+        
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['conversion'] = self.conversion
+        return context
+
+    def get_initial(self) -> Dict[str, Any]:
+        self.conversion = get_object_or_404(Conversion, id=self.request.GET.get('conversion_id'))
+        initial = super().get_initial()
+        initial['conversion'] = self.conversion
+        return initial
+
+    def form_valid(self, form):
+        form.instance.conversion = self.conversion
+        messages.success(self.request, ('Social Added!'))
+        return super().form_valid(form)
+
+class ConversionSocialUpdateDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
+    model = ConversionSocial
+    form_class = ConversionSocialForm
+    template_name = 'conversions/conversion_social_form.html'
+    slug_field = 'conversion_slug'
+    slug_url_kwarg = 'slug'
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['update'] = True
+        return context
+
+    def test_func(self):
+        obj = self.get_object()
+        return obj.conversion.owner == self.request.user
+
+    def post(self, request, *args, **kwargs):
+        if 'delete' in request.POST:
+            return self.delete(request, *args, **kwargs)
+        else:
+            return super().post(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        gadget = self.get_object()
+        gadget.delete()
+        messages.success(request, 'Social Deleted!')
+        return redirect(self.get_success_url())
+
+    def form_valid(self, form):
+        messages.success(self.request, 'Social Updated!')
         return super().form_valid(form)
 
     def get_success_url(self):

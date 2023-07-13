@@ -24,3 +24,9 @@ class GadgetForm(forms.ModelForm):
         widgets = {
             'conversion': forms.HiddenInput(),
         }
+
+
+class ConversionSocialForm(forms.ModelForm):
+    class Meta:
+        model = models.ConversionSocial
+        fields = ('conversion', 'social', 'link', 'social_username')

@@ -14,5 +14,7 @@ urlpatterns = [
     path('myconversions/update/<slug>/', views.ConversionUpdateView.as_view(), name='conversion_update'),
     path('myconversions/new_gadget/', views.GadgetCreateView.as_view(), name='gadget_create'),
     path('myconversions/edit_gadget/<int:pk>', views.GadgetUpdateDeleteView.as_view(), name='gadget_edit'),
+    path('myconversions/new_social/', views.ConversionSocialCreateView.as_view(), name='conversion_social_create'),
+    path('myconversions/edit_social/<int:pk>', views.ConversionSocialUpdateDeleteView.as_view(), name='conversion_social_edit'),
     path("conversion/<slug>/", views.ConversionDetailView.as_view(), name="van_detail"),
 ]
