@@ -9,7 +9,7 @@ class ConversionForm(forms.ModelForm):
                   'side_picture', 'veichle_cost', 'conversion_cost',
                   'summary', 'interior1', 'interior2', 'interior3',
                   'interior4', 'outro', 'visible', 'owner',
-                  'c_type'
+                  'c_type', 'verification_status'
                   )
         widgets = {
             'owner': forms.HiddenInput(),
@@ -30,3 +30,10 @@ class ConversionSocialForm(forms.ModelForm):
     class Meta:
         model = models.ConversionSocial
         fields = ('conversion', 'social', 'link', 'social_username')
+
+class VerificationForm(forms.Form):
+    VERIFICATION_CHOICES = (
+        (1, 'Approve'),
+        (2, 'Deny')
+    )
+    verification_status = forms.ChoiceField(choices=VERIFICATION_CHOICES, widget=forms.RadioSelect)

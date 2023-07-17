@@ -2,19 +2,19 @@
 {% load static %}
 {% block title %}{{ block.super }}{% endblock title %}
 {% block content %}
-<div class='container'>
+<div class='container-home'>
     <ul class='categories'>
         <div class='auto'>
             <a href="{% url 'van_list' %}">
                 <li class='vans'>
                     <img class="picture" src="{% static 'conversions/img/van2.png' %}">
-                    <div class='img-text'>Van Builds</div>
+                    <div class='img-text'>Vans</div>
                 </li>
             </a>
             <a href="{% url 'rv_list' %}">
                 <li class='rvs'>
                     <img class="picture" src="{% static 'conversions/img/rv.png' %}">
-                    <div class='img-text'>Rv Builds</div>
+                    <div class='img-text'>Rvs</div>
                 </li>
             </a>
         </div>

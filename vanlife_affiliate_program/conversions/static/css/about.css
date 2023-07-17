@@ -1,0 +1,41 @@
+.about {
+    display: flex;
+    justify-content: center;
+}
+
+.content,
+.content-aff {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.content p {
+    font-size: large;
+    border-bottom: 3px solid rgb(100, 182, 172);
+    text-align: center;
+    margin: 0;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.title {
+    border-bottom: 3px solid rgb(100, 182, 172);
+    border-top: 3px solid rgb(100, 182, 172);
+    margin-bottom: 20px;
+}
+
+.content-aff p {
+    font-size: large;
+    text-align: start;
+    margin: 0;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.icon img {
+    max-width: 20px;
+    max-height: 20px;
+}

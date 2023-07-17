@@ -1,5 +1,19 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}About | {{ block.super }}{% endblock title %}
 {% block content %}
-<p> this is about page<p>
+
+<div class='title'>
+<h1 class='about'>Welcome to Van Dreams</h1>
+<h1 class='about'><img class="picture" src="{% static 'conversions/img/logo.png' %}"></h1>
+
+</div>
+<div class='content'>
+<p>At Van Dreams, we celebrate the spirit of freedom and adventure on the open road. We are a community-driven platform designed for van and RV enthusiasts to connect, share, and inspire each other with their unique journeys and experiences.</p>
+<p>Whether you're a seasoned van lifer or just starting your van conversion project, Van Dreams is here to be your go-to resource. Our platform allows self-converted van owners and RV enthusiasts to showcase their vehicles, share their stories, and provide valuable insights into their van life adventures.</p>
+<p>Browse through our collection of inspiring van profiles, where you'll find stunning images, detailed descriptions, and a list of modifications and gadgets that make each van unique. Discover innovative conversion ideas, learn about must-have technologies, and even find affiliate links to purchase the gadgets used by van owners directly from our platform.</p>
+{% comment %} <p>But VanLife Connect is more than just a showcase of vans and gadgets. It's a thriving community of like-minded individuals who understand the joy of life on the road. Connect with fellow van lifers, ask questions, exchange tips, and build lasting friendships.</p> {% endcomment %}
+<p>Whether you're seeking inspiration, looking for practical advice, or simply want to share your own van life journey, Van Dreams is your hub for all things van life.</p>
+<p>Join our community today and embark on an unforgettable journey of freedom, exploration, and connection!</p>
+</div>
 {% endblock content %}  

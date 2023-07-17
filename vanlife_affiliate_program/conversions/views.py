@@ -6,8 +6,9 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models.query import QuerySet
 from .models import Conversion, Gadget, ConversionSocial
-from .forms import ConversionForm, GadgetForm, ConversionSocialForm
+from .forms import ConversionForm, GadgetForm, ConversionSocialForm, VerificationForm
 from urllib.parse import urlparse
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 def home(request):
     return render(request, 'conversions/home.html')
@@ -252,3 +253,43 @@ class ConversionSocialUpdateDeleteView(LoginRequiredMixin, UserPassesTestMixin, 
             return next_path
         else:
             return reverse('user_conversion_list')
+        
+class VericifationListView(LoginRequiredMixin, UserPassesTestMixin, generic.ListView):
+    model = Conversion
+    template_name = 'conversions/verification_list.html'
+    context_object_name = 'conversions'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['count'] = self.get_verification_count()
+        return context
+    
+    def get_verification_count(self):
+        queryset = self.get_queryset()
+        count = queryset.filter(verification_status=0).count()
+        return count
+    
+    def test_func(self):
+        if self.request.user.status == 2 or self.request.user.is_staff:
+            return True
+        else:
+            False
+
+
+@user_passes_test(lambda u: u.is_staff or u.status == 2)
+@login_required
+def verify_detail(request, slug):
+    conversion = get_object_or_404(Conversion, conversion_slug=slug)
+    
+    if request.method == 'POST':
+        form = VerificationForm(request.POST)
+        if form.is_valid():
+            verification_status = form.cleaned_data['verification_status']
+            conversion.verification_status = verification_status
+            conversion.save()
+            messages.success(request, 'Conversion status updated successfully.')
+            return redirect('verify_list')
+    else:
+        form = VerificationForm(initial={'verification_status': conversion.verification_status})
+    
+    return render(request, 'conversions/verify_detail.html', {'conversion': conversion, 'form': form})

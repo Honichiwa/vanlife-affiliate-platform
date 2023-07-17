@@ -56,7 +56,7 @@ def custom_login(request):
             )
             if user is not None:
                 login(request, user)
-                messages.success(request, f"Hello <b>{user.username}</b>! You have been logged in")
+                messages.success(request, f"Hello <b>&nbsp;{user.username}</b>! You have been logged in")
                 return redirect("home")
 
         else:

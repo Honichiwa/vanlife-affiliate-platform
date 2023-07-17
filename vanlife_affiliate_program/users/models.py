@@ -13,7 +13,7 @@ class ProfileIcon(models.Model):
         verbose_name_plural = _("profile icons")
 
     def __str__(self):
-        return mark_safe(f'<img src="{self.icon.url}" alt="{self.name}" width="32" height="32" />{self.name}')
+        return mark_safe(f'<img src="{self.icon.url}" alt="{self.name}" width="32" height="32" />')
 
     def get_absolute_url(self):
         return reverse("profileicon_detail", kwargs={"pk": self.pk})

@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
 {% block title %}Rvs | {{ block.super }}{% endblock title %}
 {% block content %}
+{% if count == 0 %}
+<div class='title'>
+    <p class='about'>There are no new pending verifications</p>
+</div>
+{% endif %}
 {% for conversion in conversions %}
-{% if conversion.c_type == 1 %}
-<a class="conversion-list" href="{% url 'van_detail' conversion.slug %}">
+{% if conversion.verification_status == 0 %}
+<a class="conversion-list" href="{% url 'verify_detail' conversion.slug %}">
     <h3 class="car-title">{{conversion.conversion_slug}}</h3>
     <div class="car-list">
         <div class="car-image">
@@ -20,4 +25,3 @@
 {% endif %}
 {% endfor %}
 {% endblock content %}
-

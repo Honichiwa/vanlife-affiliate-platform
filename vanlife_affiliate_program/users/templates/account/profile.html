@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 <div class="content-section col-lg-12 col-md-12 col-sm-12 tutorial-style" style="min-height:65vh;">
     <legend class="border-bottom mb-4">Profile Information:</legend>
@@ -12,7 +13,7 @@
                 <p class="text-secondary">{{ form.instance.first_name }} {{ form.instance.last_name }}</p>
                 <p class="text-secondary">{{ form.instance.email }}</p>
                 <p class="text-secondary">{{ form.instance.about_you }}</p>
-                <p class="text-secondary">{{ form.instance.icon }}</p>
+                <p class="text-secondary"><img src="{{ form.instance.icon.icon.url }}"></p>
             </div>
         </div>
 
@@ -21,16 +22,30 @@
                 <legend class="border-bottom mb-4">Edit Profile Information</legend>
                 <div class="form-row">
                     <div class="form-group col-md-6 mb-0">
-                        First name {{ form.first_name }}
+                        <label for="{{ form.first_name.id_for_label }}">First name</label>
+                        {{ form.first_name }}
                     </div>
                     <div class="form-group col-md-6 mb-0">
-                        Last name {{ form.last_name }}
+                        <label for="{{ form.last_name.id_for_label }}">Last name</label>
+                        {{ form.last_name }}
                     </div>
-                </div> 
-                Email {{ form.email }}
-                About you {{ form.about_you }}  
-                <p>Why you joined? {{form.reason}}</p>
-                <p>Icon {{form.icon}}</p>
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.email.id_for_label }}">Email</label>
+                    {{ form.email }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.about_you.id_for_label }}">About you</label>
+                    <textarea id="{{ form.about_you.id_for_label }}" name="{{ form.about_you.name }}" rows="5" style="resize: none; height: 150px;">{{ form.about_you.value }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.reason.id_for_label }}">Why you joined?</label>
+                    {{ form.reason }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.icon.id_for_label }}">Icon</label>
+                    {{ form.icon }}
+                </div>
                 <a href="/">Change password?</a>
             </fieldset>
             <div class="form-group">

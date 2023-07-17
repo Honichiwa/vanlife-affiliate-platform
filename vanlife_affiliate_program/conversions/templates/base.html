@@ -4,59 +4,71 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}CamperVanCraft{% endblock title %}</title>
+    <title>{% block title %}Van Dreams{% endblock title %}</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+    <link rel="stylesheet" href="{% static 'css/conversion_list.css' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'conversions/img/favicon.png' %}" >
 </head>
 <body>
-<header>
-    <div class='container'>
-        <ul class="nav">
-            <div  class='logo'>
-                <li><a href="{% url 'home' %}">CamperVanCraft</a></li>
-            </div>
-            <div class='head-menu'>
-                <li><a href="{% url 'about' %}">About</a></li>
-                <li>
-                    <div class="dropdown">
-                    <button class="dropbtn">Browse Builds &#11206;
-                            <div class="dropdown-content">
-                              <a href="{% url 'van_list' %}">Vans</a>
-                              <a href="{% url 'rv_list' %}">Rvs</a>
-                            </div>
-                          </div>
-                    </button>
-                </li>
-                <li><a href="{% url 'aff_guide' %}">Affiliate</a></li>
-                {% if user.is_authenticated %}
-                <li>
-                    <div class="dropdown">
-                        <button class="dropbtn">{{user.username}} &#11206;
+    <header>
+        <div class='container'>
+            <ul class="nav">
+                <div class='logo'>
+                    <a href="{% url 'home' %}"><li><img src="{% static 'conversions/img/logo2.png' %}" alt="home"></li></a>
+                </div>
+                <div class='head-menu'>
+                    <li><button class="dropbtn"><a href="{% url 'about' %}">About</a></button></li>
+                    <li>
+                        <div class="dropdown">
+                            <button class="dropbtn">Browse &#11206;
                                 <div class="dropdown-content">
-                                  <a href="{% url 'profile' user.username%}">My profile</a>
-                                  <a href="{% url 'user_conversion_list' %}">My conversion</a>
-                                  <a href="{% url 'home' %}">My liked</a>
-                                  <a href="{% url 'logout' %}">Log out</a>
+                                    <a href="{% url 'van_list' %}">Vans</a>
+                                    <a href="{% url 'rv_list' %}">Rvs</a>
+                                    <a href="{% url 'blog' %}">Blog</a>
                                 </div>
-                              </div>
-                        </button>
-                </li>
-                {% else %}
-                <li><a href="{% url 'login' %}">Log in</a></li>
-                <li><a href="{% url 'register' %}">Sing up</a></li>
-                {% endif %}
-            </div>
-        </ul>
-    </div>
-</header>
+                            </button>
+                        </div>
+                    </li>
+                    <li><button class="dropbtn"><a href="{% url 'aff_guide' %}">Affiliate</a></button></li>
+                    {% if user.is_authenticated %}
+                    <li>
+                        <div class="dropdown">
+                            <button class="dropbtn">{{user.username}} &#11206;
+                                <div class="dropdown-content">
+                                    <a href="{% url 'profile' user.username%}">My profile</a>
+                                    <a href="{% url 'user_conversion_list' %}">My conversion</a>
+                                    <a href="{% url 'logout' %}">Log out</a>
+                                    {% if user.status == 2 or user.is_staff %}
+                                    <a href="{% url 'verify_list' %}">Verifications</a>
+                                    {% endif %}
+                                </div>
+                            </button>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li><button class="dropbtn"><a href="{% url 'login' %}">Log in</a></button></li>
+                    <li><button class="dropbtn"><a href="{% url 'register' %}">Sign up</a></button></li>
+                    {% endif %}
+                </div>
+            </ul>
+        </div>
+    </header>
 <main>
 {% if messages %}
     {% for message in messages %}
-    <p class="box box-{{ message.tags }}">{{ message | safe}} {{message.tags}}</p>
-{% endfor %}
+        {% if message.tags == 'error' %}
+            <div class="box box-error">
+                <p>{{ message|safe }}</p>
+            </div>
+        {% else %}
+            <p class="box box-{{ message.tags }}">{{ message|safe }}</p>
+        {% endif %}
+    {% endfor %}
 {% endif %}
 {% block content %}
 {% endblock content %}
 </main>
-<footer><p>&copy;CamperVanCraft</p></footer>
+<footer><p>&copy;Van Dreams</p></footer>
 </body>

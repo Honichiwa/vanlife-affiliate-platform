@@ -17,4 +17,6 @@ urlpatterns = [
     path('myconversions/new_social/', views.ConversionSocialCreateView.as_view(), name='conversion_social_create'),
     path('myconversions/edit_social/<int:pk>', views.ConversionSocialUpdateDeleteView.as_view(), name='conversion_social_edit'),
     path("conversion/<slug>/", views.ConversionDetailView.as_view(), name="van_detail"),
+    path("verify/", views.VericifationListView.as_view(), name="verify_list"),
+    path('verify/<slug>/', views.verify_detail, name='verify_detail'),
 ]

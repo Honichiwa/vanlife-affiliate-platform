@@ -3,10 +3,20 @@
 {% block content %}
 {% for conversion in conversions %}
 {% if conversion.c_type == 0 %}
-<p><a href="{% url 'van_detail' conversion.slug %}">{{conversion.conversion_slug}}</a><p>
-<p>{{conversion.make}}</p>
-<p>{{conversion.model}}</p>
-<p>{{conversion.year}}</p>
+<a class="conversion-list" href="{% url 'van_detail' conversion.slug %}">
+    <h3 class="car-title">{{conversion.conversion_slug}}</h3>
+    <div class="car-list">
+        <div class="car-image">
+            <img src="{{ conversion.side_picture.url }}" alt="{{ conversion.slug }}">
+        </div>
+        <div class="car-details">
+            <p class="car-make"><strong>{{conversion.make}} {{conversion.model}}</strong></p>
+            <p class="car-year"><strong>Year:</strong> {{conversion.year}}</p>
+            <p class="car-price"><strong>Veichle cost:</strong> {{conversion.veichle_cost}}</p>
+            <p class="car-conv-budget"><strong>Conversion cost:</strong> {{conversion.conversion_cost}}</p>
+        </div>
+    </div>
+</a>
 {% endif %}
 {% endfor %}
 {% endblock content %}
