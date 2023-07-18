@@ -2,33 +2,90 @@
 {% block title %}{{conversion.conversion_slug}} | {{ block.super }}{% endblock title %}
 {% block content %}
 <div class="content-section">
-<p>{{conversion.conversion_slug}}</p>
-<p><a href="{% url 'profile' conversion.owner%}">{{conversion.owner}}</a></p>
-<p>{{conversion.make}}</p>
-<p>{{conversion.model}}</p>
-<p>{{conversion.year}}</p>
-<p>{{conversion.veichle_cost}}</p>
-<p>{{conversion.conversion_cost}}</p>
-<p>{{conversion.summary}}</p>
+<p class='user'><a href="{% url 'profile' conversion.owner%}">{{conversion.owner}} {{conversion.owner.icon}}</a></p>  
+<div class='title'>
+  <p class='about'><strong>{{conversion.conversion_slug}}</strong></p>
+</div> 
+<p class='about'>{{conversion.make}} {{conversion.model}}</p>
+<p><strong>Year:</strong> {{conversion.year}}</p>
+<p><strong>Veichle cost:</strong> {{conversion.veichle_cost}}</p>
+<p><strong>Conversion cost:</strong> {{conversion.conversion_cost}}</p>
+<div class='title'>
+  <div class="car-image">
+    <p class='about'>
+      <img src="{{ conversion.side_picture.url }}" alt="{{ conversion.slug }}">
+    </p> 
+  </div>
+</div>
+<p class='summary'>{{conversion.summary}}</p>
+{% if conversion.interior1 %}
+<div class='title'>
+  <div class="car-image">
+    <p class='about'>
+      <img src="{{ conversion.interior1.url }}" alt="{{ conversion.slug }}">
+    </p> 
+  </div>
+</div>
+{% endif %}
+{% if conversion.interior2 %}
+<div class='title'>
+  <div class="car-image">
+    <p class='about'>
+      <img src="{{ conversion.interior2.url }}" alt="{{ conversion.slug }}">
+    </p> 
+  </div>
+</div>
+{% endif %}
+{% if conversion.interior3 %}
+<div class='title'>
+  <div class="car-image">
+    <p class='about'>
+      <img src="{{ conversion.interior3.url }}" alt="{{ conversion.slug }}">
+    </p> 
+  </div>
+</div>
+{% endif %}
+{% if conversion.interior4 %}
+<div class='title'>
+  <div class="car-image">
+    <p class='about'>
+      <img src="{{ conversion.interior4.url }}" alt="{{ conversion.slug }}">
+    </p> 
+  </div>
+</div>
+{% endif %}
 {% for gadget in conversion.gadgets.all %}
-    <ul class="icon"><img src="{{ gadget.type.icon.url }}"></ul>
-    <li>{{ gadget.name }}</li>
-    <li><a href={{ gadget.aff_link }} target='_blank'>link</a></li>
+    <ul class="detail-icon"><img src="{{ gadget.type.icon.url }}"></ul>
+    <li><strong>Name:</strong> {{ gadget.name }}</li>
+    <li class='gadg-picture'><img src="{{ gadget.picture.url }}"></li>
+      <div class='edit'>
+        <li ><p class='about'><a href={{ gadget.aff_link }} target='_blank'>Affiliate Link</a></p></li>
+    </div>
     {% if user == gadget.conversion.owner %}
-    <p><a href="{% url 'gadget_edit' gadget.pk %}?next={{ request.path }}">Update Gadget</a></p>
+    <div class='edit'>
+      <p class='about'><a href="{% url 'gadget_edit' gadget.pk %}?next={{ request.path }}">Update Gadget</a></p>
+    </div>
     {% endif %}
 {% endfor %}
-<p>{{conversion.outro}}</p>
+<p class='summary'>{{conversion.outro}}</p>
+<div class="socials">
 {% for conversion_social in conversion.conversion_social.all %}
-  <p>{{conversion_social.link}}</p>
-  <p>{{ conversion_social.social.name }}</p>
-  <p>{{ conversion_social.social.svg_loggo_code | safe}}</p>
-  <p><a href="{% url 'conversion_social_edit' conversion_social.pk %}?next={{ request.path }}">Update Social</a></p>
+  <p class='social'><a href="{{conversion_social.link}}" target="_blank"><p class='logo'>{{ conversion_social.social.svg_loggo_code | safe}} @{{conversion_social.social_username}}</a></p>
+  {% if conversion_social.conversion.owner == user %}
+  <div class='edit'>
+  <p class='about'><a href="{% url 'conversion_social_edit' conversion_social.pk %}?next={{ request.path }}">Update Social</a></p>
+  </div>
+  {% endif %}
 {% endfor %}
-<p>{{conversion.created_at}}</p>
+</div>
+<p class='created_at'>{{conversion.created_at}}</p>
 {% if user == conversion.owner %}
-<p><a href="{% url 'conversion_social_create' %}?conversion_id={{ conversion.id }}&next={{ request.path }}">Add social</a></p>
-<p><a href="{% url 'gadget_create' %}?conversion_id={{ conversion.id }}&next={{ request.path }}">Create Gadget</a></p>
+<div class='title'>
+  <div class='edit'>
+    <p class='about'><a href="{% url 'conversion_social_create' %}?conversion_id={{ conversion.id }}&next={{ request.path }}">Add social</a></p>
+    <p class='about'><a href="{% url 'gadget_create' %}?conversion_id={{ conversion.id }}&next={{ request.path }}">Create Gadget</a></p>
+  </div>
+</div>
 {% endif %}
 </div>
   {% endblock content %}

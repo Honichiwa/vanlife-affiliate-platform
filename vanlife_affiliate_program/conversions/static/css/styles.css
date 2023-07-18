@@ -151,7 +151,7 @@ footer p {
 }
 
 .content-section {
-    max-width: 400px;
+    max-width: 600px;
     margin: 0 auto;
     padding: 20px;
     background-color: #f7f7f7;
@@ -209,16 +209,6 @@ input[type="password"] {
 
 .text-muted {
     font-size: 14px;
-}
-
-
-.content-section {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f7f7f7;
-    border: 1px solid #ddd;
-    border-radius: 5px;
 }
 
 legend {

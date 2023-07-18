@@ -14,6 +14,8 @@ class ConversionForm(forms.ModelForm):
         widgets = {
             'owner': forms.HiddenInput(),
             'c_type': forms.HiddenInput(),
+            'visible': forms.HiddenInput(),
+            'verification_status': forms.HiddenInput()
         }
 
 class GadgetForm(forms.ModelForm):
